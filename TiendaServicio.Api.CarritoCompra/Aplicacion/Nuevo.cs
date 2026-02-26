@@ -9,13 +9,7 @@ public class Nuevo
     public class Ejecuta : IRequest
     {
         public DateTime? FechaCreacion { get; set; }
-        public List<DetalleSesionDto> Productos { get; set; }
-    }
-
-    public class DetalleSesionDto
-    {
-        public string ProductoSeleccionado { get; set; }
-        public DateTime? FechaCreacion { get; set; }
+        public List<string> ProductoLista { get; set; }
     }
 
     public class Manejador : IRequestHandler<Ejecuta>
@@ -29,33 +23,33 @@ public class Nuevo
 
         public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
-            var carritoSesion = new CarritoSesion
+            CarritoSesion carritoSesion = new CarritoSesion
             {
                 FechaCreacion = request.FechaCreacion
             };
 
             _context.CarritoSesiones.Add(carritoSesion);
-            var valor = await _context.SaveChangesAsync();
+            int valor = await _context.SaveChangesAsync();
 
             if (valor == 0)
             {
                 throw new Exception("No se pudo insertar el carrito de compras");
             }
 
-            foreach (var producto in request.Productos)
+            foreach (string producto in request.ProductoLista)
             {
-                var detalle = new CarritoSesionDetalle
+                CarritoSesionDetalle detalle = new CarritoSesionDetalle
                 {
+                    FechaCreacion = DateTime.Now,
                     CarritoSesionId = carritoSesion.CarritoSesionId,
-                    ProductoSeleccionado = producto.ProductoSeleccionado,
-                    FechaCreacion = producto.FechaCreacion
+                    ProductoSeleccionado = producto
                 };
                 _context.CarritoSesionDetalles.Add(detalle);
             }
 
-            var valorDetalle = await _context.SaveChangesAsync();
+            valor = await _context.SaveChangesAsync();
 
-            if (valorDetalle > 0)
+            if (valor > 0)
             {
                 return Unit.Value;
             }

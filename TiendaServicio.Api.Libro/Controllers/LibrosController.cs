@@ -23,7 +23,7 @@ public class LibrosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<LibroMaterialDto>>> GetLibros()
+    public async Task<ActionResult<List<LibroMaterialDto>>> GetLibro()
     {
         return await _mediator.Send(new Consulta.ListaLibro());
     }

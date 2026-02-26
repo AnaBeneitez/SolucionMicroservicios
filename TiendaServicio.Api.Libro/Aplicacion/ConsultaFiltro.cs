@@ -25,8 +25,13 @@ public class ConsultaFiltro
         }
         public async Task<LibroMaterialDto> Handle(LibroUnico request, CancellationToken cancellationToken)
         {
+            if(!Guid.TryParse(request.LibreriaMaterialID, out Guid libreriaMaterialId))
+            {
+                throw new Exception("El ID proporcionado no es un GUID válido");
+            }
+
             LibreriaMaterial? libro = await _contextoLibreria.Libros
-                                .Where(x => x.LibreriaMaterialID == new Guid(request.LibreriaMaterialID))
+                                .Where(x => x.LibreriaMaterialID == libreriaMaterialId)
                                 .FirstOrDefaultAsync();
 
             if (libro == null)
