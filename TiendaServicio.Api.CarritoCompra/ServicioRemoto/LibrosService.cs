@@ -19,7 +19,7 @@ public class LibrosService : ILibrosService
         try
         {
             HttpClient httpClient = _httpClientFactory.CreateClient("Libros");
-            HttpResponseMessage response = await httpClient.GetAsync($"/api/libros/{libroId}");
+            HttpResponseMessage response = await httpClient.GetAsync($"/api/Libros/{libroId}");
             if (response.IsSuccessStatusCode)
             {
                 LibroRemoto? libroDto = await response.Content.ReadFromJsonAsync<LibroRemoto>();
