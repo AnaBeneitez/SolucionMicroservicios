@@ -22,8 +22,8 @@ public class LibrosService : ILibrosService
             HttpResponseMessage response = await httpClient.GetAsync($"/api/Libros/{libroId}");
             if (response.IsSuccessStatusCode)
             {
-                LibroRemoto? libroDto = await response.Content.ReadFromJsonAsync<LibroRemoto>();
-                return (true, libroDto, null);
+                LibroRemoto? libroRemoto = await response.Content.ReadFromJsonAsync<LibroRemoto>();
+                return (true, libroRemoto, null);
             }
 
             _logger.LogError($"Error al obtener el libro con ID {libroId}. Status Code: {response.StatusCode}");

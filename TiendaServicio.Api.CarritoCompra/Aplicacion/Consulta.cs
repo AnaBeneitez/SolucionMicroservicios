@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TiendaServicio.Api.CarritoCompra.InterfazRemota;
 using TiendaServicio.Api.CarritoCompra.Modelo;
 using TiendaServicio.Api.CarritoCompra.Modelo.DTOs;
+using TiendaServicio.Api.CarritoCompra.ModeloRemoto;
 using TiendaServicio.Api.CarritoCompra.Persistencia;
 
 namespace TiendaServicio.Api.CarritoCompra.Aplicacion;
@@ -46,7 +47,7 @@ public class Consulta
 
                 if(response.resultado)
                 {
-                    var objetoLibro = response.libro;
+                    LibroRemoto objetoLibro = response.libro;
 
                     CarritoDetalleDto detalleDto = new()
                     {

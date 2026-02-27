@@ -23,7 +23,7 @@ public class Nuevo
 
         public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
-            CarritoSesion carritoSesion = new CarritoSesion
+            CarritoSesion carritoSesion = new ()
             {
                 FechaCreacion = request.FechaCreacion
             };
@@ -38,7 +38,7 @@ public class Nuevo
 
             foreach (string producto in request.ProductoLista)
             {
-                CarritoSesionDetalle detalle = new CarritoSesionDetalle
+                CarritoSesionDetalle detalle = new ()
                 {
                     FechaCreacion = DateTime.Now,
                     CarritoSesionId = carritoSesion.CarritoSesionId,

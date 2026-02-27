@@ -23,7 +23,7 @@ public class Nuevo
         }
         public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
-            AutorLibro autorLibro = new AutorLibro
+            AutorLibro autorLibro = new ()
             {
                 Nombre = request.Nombre,
                 Apellido = request.Apellido,

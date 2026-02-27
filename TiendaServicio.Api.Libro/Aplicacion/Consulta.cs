@@ -25,7 +25,7 @@ public class Consulta
         public async Task<List<LibroMaterialDto>> Handle(ListaLibro request, CancellationToken cancellationToken)
         {
             List<LibreriaMaterial> libros = await _contextoLibreria.Libros.ToListAsync();
-            var librosDto = _mapper.Map<List<LibroMaterialDto>>(libros);
+            List<LibroMaterialDto> librosDto = _mapper.Map<List<LibroMaterialDto>>(libros);
 
             return librosDto;
         }
